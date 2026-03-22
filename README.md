@@ -9,11 +9,18 @@
 
 ---
 
+> [!IMPORTANT]
+> This is a **personal fork** of the original [Book's Story](https://github.com/Acclorite/book-story).
+> This version includes custom changes, primarily focusing on EPUB metadata editing.
+> **This fork was made for personal use only and does not promise any future updates or maintenance.**
+
+---
+
 <!------------ Header ------------>
 
 <div align="center">
   <img src="fastlane/metadata/android/en-US/images/icon_2.png" width="120" />
-  <h1>Book's Story</h1>
+  <h1>Book's Story (Fork)</h1>
   <h3>Material You eBook Reader for Android</h3>
   <p>Dive into the world of adventure as you discover your favorite book's story!</p>
 </div>
@@ -41,8 +48,8 @@
 
 <img src="fastlane/metadata/android/en-US/images/featureGraphic.png">
 
-Enjoy a sleek, customizable **reading app** with modern design, built with Jetpack Compose. It’s
-open-source, offering you a personalized, ad-free journey through your favorite books!
+This is a **personal fork** of Book's Story, adding enhanced metadata controls and subtitle support.
+It offers a personalized, ad-free journey through your favorite books with full control over metadata!
 
 ---
 
@@ -68,6 +75,9 @@ open-source, offering you a personalized, ad-free journey through your favorite 
 
 - Storage Access Framework
 - 7 supported file formats(.pdf, .txt, .epub, .fb2, .html, .htm, .md)
+- **EPUB Metadata Editing**: Support for Title, Subtitle, Author, and Description.
+- **EPUB Subtitle Parsing & Writing**: View and edit subtitles directly inside the file.
+- **Metadata Synchronization**: Changes are written back to the internal EPUB metadata files.
 - Material You design with unique themes and color presets
 - Organized Library with custom categories and chapters in the Reader
 - Highly customizable
