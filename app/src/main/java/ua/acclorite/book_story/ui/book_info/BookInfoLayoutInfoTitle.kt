@@ -21,7 +21,7 @@ fun BookInfoLayoutInfoTitle(
     showTitleDialog: (BookInfoEvent.OnShowTitleDialog) -> Unit
 ) {
     StyledText(
-        text = book.title,
+        text = if (!book.subtitle.isNullOrBlank()) "${book.title}: ${book.subtitle}" else book.title,
         modifier = Modifier
             .fillMaxWidth()
             .noRippleClickable(

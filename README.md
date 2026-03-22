@@ -48,7 +48,7 @@
 
 <img src="fastlane/metadata/android/en-US/images/featureGraphic.png">
 
-This is a **personal fork** of Book's Story, adding enhanced metadata controls and subtitle support.
+This is a **personal fork** of Book's Story, adding enhanced metadata controls such as Title and Sub-title editing.
 It offers a personalized, ad-free journey through your favorite books with full control over metadata!
 
 ---
@@ -75,9 +75,8 @@ It offers a personalized, ad-free journey through your favorite books with full 
 
 - Storage Access Framework
 - 7 supported file formats(.pdf, .txt, .epub, .fb2, .html, .htm, .md)
-- **EPUB Metadata Editing**: Support for Title, Subtitle, Author, and Description.
-- **EPUB Subtitle Parsing & Writing**: View and edit subtitles directly inside the file.
-- **Metadata Synchronization**: Changes are written back to the internal EPUB metadata files.
+- **EPUB Metadata Editing**: Complete support for Title, Sub-title, Author, and Description.
+- **Metadata Synchronization**: Changes are written directly back to the internal EPUB metadata files.
 - Material You design with unique themes and color presets
 - Organized Library with custom categories and chapters in the Reader
 - Highly customizable
