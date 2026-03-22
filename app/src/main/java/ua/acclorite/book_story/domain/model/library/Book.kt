@@ -20,6 +20,7 @@ data class Book(
     val title: String,
     val author: UIText,
     val description: String?,
+    val subtitle: String? = null,
 
     val filePath: String,
     val coverImage: Uri?,
@@ -37,6 +38,7 @@ data class Book(
             title = "",
             author = UIText.StringValue(""),
             description = null,
+            subtitle = null,
             filePath = "",
             coverImage = null,
             scrollIndex = 0,

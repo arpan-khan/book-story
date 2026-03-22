@@ -19,6 +19,7 @@ data class BookEntity(
     val title: String,
     val author: String,
     val description: String?,
+    val subtitle: String?,
     val filePath: String,
     val scrollIndex: Int,
     val scrollOffset: Int,

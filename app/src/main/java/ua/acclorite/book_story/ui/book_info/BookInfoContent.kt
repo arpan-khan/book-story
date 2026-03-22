@@ -26,6 +26,7 @@ fun BookInfoContent(
     listState: LazyListState,
     canResetCover: Boolean,
     showChangeCoverBottomSheet: (BookInfoEvent.OnShowChangeCoverBottomSheet) -> Unit,
+    showEditMetadataBottomSheet: (BookInfoEvent.OnShowEditMetadataBottomSheet) -> Unit,
     showDetailsBottomSheet: (BookInfoEvent.OnShowDetailsBottomSheet) -> Unit,
     showTitleDialog: (BookInfoEvent.OnShowTitleDialog) -> Unit,
     actionTitleDialog: (BookInfoEvent.OnActionTitleDialog) -> Unit,
@@ -43,6 +44,7 @@ fun BookInfoContent(
     resetCover: (BookInfoEvent.OnResetCover) -> Unit,
     deleteCover: (BookInfoEvent.OnDeleteCover) -> Unit,
     checkCoverReset: (BookInfoEvent.OnCheckCoverReset) -> Unit,
+    onSaveMetadata: (BookInfoEvent.OnSaveMetadata) -> Unit,
     dismissDialog: (BookInfoEvent.OnDismissDialog) -> Unit,
     dismissBottomSheet: (BookInfoEvent.OnDismissBottomSheet) -> Unit,
     navigateToReader: (BookInfoEvent.OnNavigateToReader) -> Unit,
@@ -74,17 +76,20 @@ fun BookInfoContent(
         resetCover = resetCover,
         deleteCover = deleteCover,
         checkCoverReset = checkCoverReset,
+        onSaveMetadata = onSaveMetadata,
+        showChangeCoverBottomSheet = showChangeCoverBottomSheet,
         dismissBottomSheet = dismissBottomSheet
     )
 
     BookInfoScaffold(
         book = book,
         listState = listState,
+        showChangeCoverBottomSheet = showChangeCoverBottomSheet,
+        showEditMetadataBottomSheet = showEditMetadataBottomSheet,
+        showDetailsBottomSheet = showDetailsBottomSheet,
         showTitleDialog = showTitleDialog,
         showAuthorDialog = showAuthorDialog,
         showDescriptionDialog = showDescriptionDialog,
-        showChangeCoverBottomSheet = showChangeCoverBottomSheet,
-        showDetailsBottomSheet = showDetailsBottomSheet,
         showMoveDialog = showMoveDialog,
         showDeleteDialog = showDeleteDialog,
         navigateToReader = navigateToReader,

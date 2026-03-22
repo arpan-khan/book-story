@@ -55,6 +55,12 @@ class EpubFileParser @Inject constructor() : FileParser {
                         }
                     }
 
+                    val subtitle = document.select("metadata > dc|title").firstOrNull { 
+                        it.attr("opf:type") == "subtitle" 
+                    }?.text()?.trim() ?: document.select("metadata > dc|title").let { titles ->
+                        if (titles.size > 1) titles[1].text().trim() else null
+                    }
+
                     val description = Jsoup.parse(
                         document.select("metadata > dc|description").text()
                     ).text().run {
@@ -67,6 +73,7 @@ class EpubFileParser @Inject constructor() : FileParser {
                         title = title,
                         author = author,
                         description = description,
+                        subtitle = subtitle,
                         scrollIndex = 0,
                         scrollOffset = 0,
                         progress = 0f,

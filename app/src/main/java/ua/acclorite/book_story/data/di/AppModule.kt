@@ -60,6 +60,7 @@ object AppModule {
             DatabaseHelper.MANUAL_MIGRATION_13_14, // remove nullability from ColorPresetEntity
             DatabaseHelper.MANUAL_MIGRATION_14_15, // remove author nullability from BookEntity
             DatabaseHelper.MANUAL_MIGRATION_15_16, // merge CategoryEntity and CategorySortEntity
+            DatabaseHelper.MANUAL_MIGRATION_16_17, // add subtitle to BookEntity
         ).allowMainThreadQueries().build().also { database ->
             // Additional Migrations
             DatabaseHelper.AUTO_MIGRATION_7_8.removeBooksDir(app)

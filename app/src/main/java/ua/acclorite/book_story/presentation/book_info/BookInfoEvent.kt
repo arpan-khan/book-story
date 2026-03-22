@@ -16,6 +16,7 @@ sealed class BookInfoEvent {
     data object OnShowDetailsBottomSheet : BookInfoEvent()
 
     data object OnShowChangeCoverBottomSheet : BookInfoEvent()
+    data object OnShowEditMetadataBottomSheet : BookInfoEvent()
 
     data class OnChangeCover(
         val image: Bitmap
@@ -70,4 +71,11 @@ sealed class BookInfoEvent {
     data object OnNavigateToLibrarySettings : BookInfoEvent()
 
     data object OnNavigateToReader : BookInfoEvent()
+
+    data class OnSaveMetadata(
+        val title: String,
+        val subtitle: String?,
+        val author: String,
+        val description: String?
+    ) : BookInfoEvent()
 }

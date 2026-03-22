@@ -24,6 +24,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
             progress = book.progress,
             author = book.author.getAsString() ?: "",
             description = book.description,
+            subtitle = book.subtitle,
             image = book.coverImage?.toString(),
             categories = book.categories
         )
@@ -38,6 +39,7 @@ class BookMapperImpl @Inject constructor() : BookMapper {
                 else UIText.StringResource(R.string.unknown_author)
             },
             description = bookEntity.description,
+            subtitle = bookEntity.subtitle,
             scrollIndex = bookEntity.scrollIndex,
             scrollOffset = bookEntity.scrollOffset,
             progress = bookEntity.progress,

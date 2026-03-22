@@ -38,6 +38,7 @@ data class BookInfoScreen(val bookId: Int) : Screen, Parcelable {
 
         const val CHANGE_COVER_BOTTOM_SHEET = "change_cover_bottom_sheet"
         const val DETAILS_BOTTOM_SHEET = "details_bottom_sheet"
+        const val EDIT_METADATA_BOTTOM_SHEET = "edit_metadata_bottom_sheet"
 
         val changePathChannel: Channel<Boolean> = Channel(Channel.CONFLATED)
     }
@@ -98,8 +99,10 @@ data class BookInfoScreen(val bookId: Int) : Screen, Parcelable {
                 resetCover = screenModel::onEvent,
                 deleteCover = screenModel::onEvent,
                 dismissBottomSheet = screenModel::onEvent,
+                onSaveMetadata = screenModel::onEvent,
                 dismissDialog = screenModel::onEvent,
                 showChangeCoverBottomSheet = screenModel::onEvent,
+                showEditMetadataBottomSheet = screenModel::onEvent,
                 showDetailsBottomSheet = screenModel::onEvent,
                 showMoveDialog = screenModel::onEvent,
                 actionMoveDialog = screenModel::onEvent,

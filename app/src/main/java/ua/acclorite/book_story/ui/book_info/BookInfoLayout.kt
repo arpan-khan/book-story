@@ -28,6 +28,7 @@ fun BookInfoLayout(
     listState: LazyListState,
     paddingValues: PaddingValues,
     showChangeCoverBottomSheet: (BookInfoEvent.OnShowChangeCoverBottomSheet) -> Unit,
+    showEditMetadataBottomSheet: (BookInfoEvent.OnShowEditMetadataBottomSheet) -> Unit,
     showTitleDialog: (BookInfoEvent.OnShowTitleDialog) -> Unit,
     showAuthorDialog: (BookInfoEvent.OnShowAuthorDialog) -> Unit,
     showDescriptionDialog: (BookInfoEvent.OnShowDescriptionDialog) -> Unit,
@@ -66,6 +67,7 @@ fun BookInfoLayout(
             Spacer(Modifier.height(18.dp))
             BookInfoLayoutActions(
                 showMoveDialog = showMoveDialog,
+                showEditMetadataBottomSheet = showEditMetadataBottomSheet,
                 showDeleteDialog = showDeleteDialog
             )
         }

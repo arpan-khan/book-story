@@ -1,6 +1,6 @@
 /*
  * Book's Story — free and open-source Material You eBook reader.
- * Copyright (C) 2024-2026 Acclorite
+ * Copyright (C) 2024-2024 Acclorite
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoveUp
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import ua.acclorite.book_story.presentation.book_info.BookInfoEvent
 @Composable
 fun BookInfoLayoutActions(
     showMoveDialog: (BookInfoEvent.OnShowMoveDialog) -> Unit,
+    showEditMetadataBottomSheet: (BookInfoEvent.OnShowEditMetadataBottomSheet) -> Unit,
     showDeleteDialog: (BookInfoEvent.OnShowDeleteDialog) -> Unit
 ) {
     Row(
@@ -38,7 +40,7 @@ fun BookInfoLayoutActions(
     ) {
         BookInfoLayoutActionsItem(
             modifier = Modifier.weight(1f),
-            alignmentStart = true,
+            alignment = 0,
             title = stringResource(id = R.string.move),
             icon = Icons.Default.MoveUp,
             onClick = {
@@ -48,7 +50,17 @@ fun BookInfoLayoutActions(
 
         BookInfoLayoutActionsItem(
             modifier = Modifier.weight(1f),
-            alignmentStart = false,
+            alignment = 1,
+            title = stringResource(id = R.string.edit),
+            icon = Icons.Default.Edit,
+            onClick = {
+                showEditMetadataBottomSheet(BookInfoEvent.OnShowEditMetadataBottomSheet)
+            }
+        )
+
+        BookInfoLayoutActionsItem(
+            modifier = Modifier.weight(1f),
+            alignment = 2,
             title = stringResource(id = R.string.delete),
             icon = Icons.Default.Delete,
             onClick = {

@@ -113,6 +113,9 @@
     <string name="delete_cover">Delete cover image</string>
     <string name="delete_cover_desc">Delete current cover image of the book</string>
     <string name="author">Author</string>
+    <string name="title">Title</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="description">Description</string>
 
     <!-- Tabs -->
     <string name="default_tab">Default</string>

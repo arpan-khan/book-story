@@ -25,6 +25,8 @@ fun BookInfoBottomSheet(
     resetCover: (BookInfoEvent.OnResetCover) -> Unit,
     deleteCover: (BookInfoEvent.OnDeleteCover) -> Unit,
     checkCoverReset: (BookInfoEvent.OnCheckCoverReset) -> Unit,
+    onSaveMetadata: (BookInfoEvent.OnSaveMetadata) -> Unit,
+    showChangeCoverBottomSheet: (BookInfoEvent.OnShowChangeCoverBottomSheet) -> Unit,
     dismissBottomSheet: (BookInfoEvent.OnDismissBottomSheet) -> Unit
 ) {
     when (bottomSheet) {
@@ -46,6 +48,15 @@ fun BookInfoBottomSheet(
                 file = file,
                 loadingFile = loadingFile,
                 showPathDialog = showPathDialog,
+                dismissBottomSheet = dismissBottomSheet
+            )
+        }
+
+        BookInfoScreen.EDIT_METADATA_BOTTOM_SHEET -> {
+            BookInfoEditMetadataBottomSheet(
+                book = book,
+                onSave = onSaveMetadata,
+                showChangeCoverBottomSheet = showChangeCoverBottomSheet,
                 dismissBottomSheet = dismissBottomSheet
             )
         }

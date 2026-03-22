@@ -6,6 +6,7 @@
 
 package ua.acclorite.book_story.presentation.book_info
 
+import ua.acclorite.book_story.core.ui.UIText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +28,7 @@ import ua.acclorite.book_story.domain.use_case.book.GetFileFromBookUseCase
 import ua.acclorite.book_story.domain.use_case.book.ResetCoverImageUseCase
 import ua.acclorite.book_story.domain.use_case.book.UpdateBookUseCase
 import ua.acclorite.book_story.domain.use_case.book.UpdateCoverImageUseCase
+import ua.acclorite.book_story.domain.use_case.book.WriteEpubMetadataUseCase
 import ua.acclorite.book_story.presentation.browse.BrowseScreen
 import ua.acclorite.book_story.presentation.history.HistoryScreen
 import ua.acclorite.book_story.presentation.library.LibraryScreen
@@ -41,7 +43,8 @@ class BookInfoModel @Inject constructor(
     private val getFileFromBookUseCase: GetFileFromBookUseCase,
     private val deleteBookUseCase: DeleteBookUseCase,
     private val canResetCoverImageUseCase: CanResetCoverImageUseCase,
-    private val resetCoverImageUseCase: ResetCoverImageUseCase
+    private val resetCoverImageUseCase: ResetCoverImageUseCase,
+    private val writeEpubMetadataUseCase: WriteEpubMetadataUseCase
 ) : ViewModel() {
 
     private val mutex = Mutex()
@@ -73,6 +76,14 @@ class BookInfoModel @Inject constructor(
                     }
                 }
 
+                is BookInfoEvent.OnShowEditMetadataBottomSheet -> {
+                    _state.update {
+                        it.copy(
+                            bottomSheet = BookInfoScreen.EDIT_METADATA_BOTTOM_SHEET
+                        )
+                    }
+                }
+
                 is BookInfoEvent.OnChangeCover -> {
                     withContext(Dispatchers.Default) {
                         updateCoverImageUseCase(_state.value.book.id, event.image)
@@ -88,6 +99,15 @@ class BookInfoModel @Inject constructor(
                                 canResetCover = canResetCoverImageUseCase(it.book.id)
                             )
                         }
+
+                        writeEpubMetadataUseCase(
+                            bookId = _state.value.book.id,
+                            title = null,
+                            subtitle = null,
+                            author = null,
+                            description = null,
+                            coverImageUri = updatedCoverImage
+                        )
 
                         LibraryScreen.refreshListChannel.trySend(0)
                         HistoryScreen.refreshListChannel.trySend(0)
@@ -184,6 +204,15 @@ class BookInfoModel @Inject constructor(
                         }
                         updateBookUseCase(_state.value.book)
 
+                        writeEpubMetadataUseCase(
+                            bookId = _state.value.book.id,
+                            title = event.title,
+                            subtitle = null,
+                            author = null,
+                            description = null,
+                            coverImageUri = null
+                        )
+
                         LibraryScreen.refreshListChannel.trySend(0)
                         HistoryScreen.refreshListChannel.trySend(0)
 
@@ -210,6 +239,15 @@ class BookInfoModel @Inject constructor(
                         }
                         updateBookUseCase(_state.value.book)
 
+                        writeEpubMetadataUseCase(
+                            bookId = _state.value.book.id,
+                            title = null,
+                            subtitle = null,
+                            author = event.author.getAsString(),
+                            description = null,
+                            coverImageUri = null
+                        )
+
                         LibraryScreen.refreshListChannel.trySend(0)
                         HistoryScreen.refreshListChannel.trySend(0)
 
@@ -235,6 +273,15 @@ class BookInfoModel @Inject constructor(
                             )
                         }
                         updateBookUseCase(_state.value.book)
+
+                        writeEpubMetadataUseCase(
+                            bookId = _state.value.book.id,
+                            title = null,
+                            subtitle = null,
+                            author = null,
+                            description = event.description ?: "",
+                            coverImageUri = null
+                        )
 
                         LibraryScreen.refreshListChannel.trySend(0)
                         HistoryScreen.refreshListChannel.trySend(0)
@@ -351,6 +398,36 @@ class BookInfoModel @Inject constructor(
 
                 is BookInfoEvent.OnNavigateToReader -> {
                     _effects.emit(BookInfoEffect.OnNavigateToReader)
+                }
+
+                is BookInfoEvent.OnSaveMetadata -> {
+                    viewModelScope.launch {
+                        withContext(Dispatchers.Default) {
+                            _state.update {
+                                it.copy(
+                                    book = it.book.copy(
+                                        title = event.title,
+                                        subtitle = event.subtitle,
+                                        author = UIText.StringValue(event.author),
+                                        description = event.description
+                                    )
+                                )
+                            }
+                            updateBookUseCase(_state.value.book)
+
+                            writeEpubMetadataUseCase(
+                                bookId = _state.value.book.id,
+                                title = event.title,
+                                subtitle = event.subtitle,
+                                author = event.author,
+                                description = event.description ?: "",
+                                coverImageUri = null
+                            )
+
+                            LibraryScreen.refreshListChannel.trySend(0)
+                            HistoryScreen.refreshListChannel.trySend(0)
+                        }
+                    }
                 }
             }
         }.also { eventStack.add(it) }

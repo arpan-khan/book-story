@@ -24,6 +24,7 @@ fun BookInfoScaffold(
     book: Book,
     listState: LazyListState,
     showChangeCoverBottomSheet: (BookInfoEvent.OnShowChangeCoverBottomSheet) -> Unit,
+    showEditMetadataBottomSheet: (BookInfoEvent.OnShowEditMetadataBottomSheet) -> Unit,
     showDetailsBottomSheet: (BookInfoEvent.OnShowDetailsBottomSheet) -> Unit,
     showTitleDialog: (BookInfoEvent.OnShowTitleDialog) -> Unit,
     showAuthorDialog: (BookInfoEvent.OnShowAuthorDialog) -> Unit,
@@ -56,6 +57,7 @@ fun BookInfoScaffold(
             showAuthorDialog = showAuthorDialog,
             showDescriptionDialog = showDescriptionDialog,
             showChangeCoverBottomSheet = showChangeCoverBottomSheet,
+            showEditMetadataBottomSheet = showEditMetadataBottomSheet,
             showMoveDialog = showMoveDialog,
             showDeleteDialog = showDeleteDialog,
             navigateToReader = navigateToReader

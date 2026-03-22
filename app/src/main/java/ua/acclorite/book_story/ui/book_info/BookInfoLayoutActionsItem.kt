@@ -27,22 +27,22 @@ import ua.acclorite.book_story.ui.common.components.common.StyledText
 @Composable
 fun BookInfoLayoutActionsItem(
     modifier: Modifier = Modifier,
-    alignmentStart: Boolean,
+    alignment: Int, // 0: Start, 1: Center, 2: End
     title: String,
     icon: ImageVector,
     onClick: () -> Unit
 ) {
-    val shape = remember(alignmentStart) {
-        when (alignmentStart) {
-            true -> RoundedCornerShape(
+    val shape = remember(alignment) {
+        when (alignment) {
+            0 -> RoundedCornerShape(
                 topEnd = 4.dp,
                 bottomEnd = 4.dp
             )
-
-            false -> RoundedCornerShape(
+            2 -> RoundedCornerShape(
                 topStart = 4.dp,
                 bottomStart = 4.dp
             )
+            else -> RoundedCornerShape(4.dp)
         }
     }
 
